@@ -1,0 +1,38 @@
+TO make a program that does
+
+-> Ask for 2 dates
+    -> Optimizations are 
+       -> last one months
+       -> last 6 months
+       -> last 1 yr
+       -> last 3 years
+       -> last 5 years.
+-> Should give the sorted list of funds on the cagr of their nav between these 2 dates
+-> Should validate whether fund is present in master list first
+-> Should validate whether this fund is available in both dates daily-nav file.
+-> Should provide missing list of funds in either dates 
+
+How files are stored:
+
+The script will always work in a directory and a repo direct is a sub-dir of cwd of script
+The repo dir has master list in clear text format.
+The repo dir has a archive list that stores the daily-nav of every day for a month. So there is archive for every month
+
+
+
+Need:
+-> One standard format that just has 
+     Fund-name and nav separated by ; The file name itself is the date in form yyyy-mm-dd-nav.
+      -> Need a converter script that is able to prepare this file both from today-nav and historical-nav formats
+      -> today-nav will named yyyy-mm-dd-today and historical will be named yyyy-mm-dd-hist
+      -> we will call this daily-nav-format
+-> list of overall available funds.
+    -> This is called master list
+    -> This is of the same format as daily-nav and has 1 more column extra. This tells what type of fund it is.
+    -> Types are those listed in today-nav format.
+-> a script that updates master list when given a daily-nav
+    -> This should update master list and optionally report
+      -> what was updated in master list 
+      -> what is missing in this list.
+      -> As to updating type in master, it is left blank. There wlil be another script that will update type from a today-nav file
+-> Does fund 

@@ -1,0 +1,41 @@
+Get hist:
+---------
+
+get_hist_nav_for_a_date.tcl yyyy-mm-dd
+
+Convert hist to nav:
+---------------------
+
+convert_historical_to_daily_format.sh yyyy-mm-dd-hist
+
+Collect names list from today file:
+-----------------------------------
+
+awk -f prepare_names_list.awk 2013-07-01-today > list
+
+for i in $(ls 2013-0*today) ; do awk -f prepare_names_list.awk $i ; done | sort | uniq > master_list
+
+cp master_list ../repository/repo
+
+Building repository
+-------------------
+
+mv *nav /home/lakskuma/Lakshman/work/tries/daily-nav/repository/repo
+./bundle_files.sh
+
+Find missing files
+-------------------
+
+./list_missing_files.sh   | grep not | awk ' {print $1}' > missing_files
+
+
+collect history
+---------------
+
+keep list in pending_file and just download
+download_files.sh <count>
+
+
+Verify names in daily-file against a list:
+-------------------------------------------
+
