@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPODIR=repo
+REPODIR=../nav-repo/
 
 cd $REPODIR
 
