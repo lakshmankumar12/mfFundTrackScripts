@@ -36,6 +36,8 @@ keep list in pending_file and just download
 download_files.sh <count>
 
 
-Verify names in daily-file against a list:
--------------------------------------------
+get cagr between 2 dates for a fund
+------------------------------------
+
+./check_returns.tcl <start-dd-mm-yyyy> <start-nav> <end-dd-mm-yyyy> <end-nav>
 
