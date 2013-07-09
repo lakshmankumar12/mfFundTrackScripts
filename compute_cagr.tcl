@@ -114,8 +114,7 @@ proc get_cagr { inv returns days } {
     incr attempt
   }
 
-  puts "Ran out of attempts"
-  exit 1
+  throw "Ran out of attempts"
 }
 
 ;# input(no_of_items)  - should tell number of samples. Must be minimally 2.
@@ -198,8 +197,7 @@ proc get_xirr_core { input_arg } {
     incr attempt
   }
 
-  puts "Ran out of attempts"
-  exit 1
+  throw "Ran out of attempts"
 }
 
 ;# input(no_of_items)

@@ -39,5 +39,6 @@ download_files.sh <count>
 get cagr between 2 dates for a fund
 ------------------------------------
 
-./check_returns.tcl <start-dd-mm-yyyy> <start-nav> <end-dd-mm-yyyy> <end-nav>
+./compare_2_dates.sh <yyyy-mm-dd> <yyyy-mm-dd>
+
 
