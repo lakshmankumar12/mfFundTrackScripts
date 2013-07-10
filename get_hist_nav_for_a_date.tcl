@@ -11,9 +11,16 @@ proc usage {} {
 
 proc handle_time_out { exit_option err_log } {
   global link
+  global started_getting
   puts "Timed out: $err_log"
   puts "link: $link"
   if { $exit_option == 0 } {
+    if { $started_getting != 1 } { 
+      exit 1
+    }
+    if { $::env(NO_INTERACT) == 1 } {
+      exit 1;
+    }
     interact
   }
   exit 1
@@ -36,13 +43,18 @@ append link $link_date
 
 puts "link: $link"
 
+set started_getting 0
+
 spawn w3m $link
 
 set page_op ""
 
-set timeout 600
+set timeout 20
 
 expect {
+  "Received cookie:"         { set started_getting 1 ; exp_continue }
+  "||"                       { exp_continue }
+  "May lead to memory leak and poor performance" { exp_continue }
   full_buffer                { exp_continue }
   timeout                    { handle_time_out 0 "nav-history timed out" }
   "Viewing <NAV - History>"
