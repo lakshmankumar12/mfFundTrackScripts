@@ -30,11 +30,11 @@ check_if_date_exists()
   else 
    month=${date:0:7}
    month_file=$month-nav.tar.bz2
-   if [ -f $month_file ] ; then 
-     date_present=$(tar jtf $month_file $date_file  | grep $date | wc)
-     if [ $date_present -eq 1 ] ; then 
+   if [ -f $REPO_DIR/$month_file ] ; then 
+     date_present=$(tar jtf $REPO_DIR/$month_file $date_file  | grep $date | wc -l)
+     if [ $date_present == 1 ] ; then 
         echo "good .. $date exists in tarball"
-        tar jxf $month_file $date_file
+        tar jxf $REPO_DIR/$month_file $date_file
         mv $date_file $SCRATCH_DIR
         date_exists=1;
      fi
