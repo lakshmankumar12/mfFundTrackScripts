@@ -211,7 +211,7 @@ proc get_xirr { input_arg } {
 
   if { $input(no_of_items) < 2 } {
     puts "input(no_of_items) : $input(no_of_items) is < 2"
-    exit
+    exit 1
   }
 
   set epoch_first [ get_epoch $input(date,0) $input(month,0) $input(year,0) ]
@@ -232,7 +232,7 @@ proc get_xirr { input_arg } {
 proc get_xirr_for_input_in_file { file_name } {
   if { [ file isfile $file_name ] != 1 } {
     puts "Unable to open file $file_name"
-    exit 
+    exit  1
   }
   set fd [ open $file_name "r" ]
   set i 0
@@ -246,14 +246,14 @@ proc get_xirr_for_input_in_file { file_name } {
       ;# empty line
       continue
     }
-    set date_pattern {([[:digit:]]{2})-([[:digit:]]{2})-([[:digit:]]{4})}
+    set date_pattern {([[:digit:]]{4})-([[:digit:]]{2})-([[:digit:]]{2})}
     set amount_pattern {-?[[:digit:]]+(\.[[:digit:]]{2})?}
     set space {[[:space:]]+}
     set pattern "$date_pattern$space"
     append pattern "($amount_pattern)"
-    set res [ regexp $pattern $line discard dd mm yyyy amount]
+    set res [ regexp $pattern $line discard yyyy mm dd amount]
     if { $res != 1 } {
-      puts "line $line didn't match pattern $pattern"; exit 
+      puts "line $line didn't match pattern $pattern"; exit 1
     }
     set input(date,$i) $dd
     set input(month,$i) $mm
@@ -271,35 +271,35 @@ proc my_main { } {
   puts -nonewline "Enter the amount you invest:"; flush stdout;
   gets stdin investment  
   if { [ string is space $investment ] == 1 } { 
-    puts "You must enter an amount" ; exit
+    puts "You must enter an amount" ; exit 1
   } elseif { [ string is double $investment ] == 0 } {
-    puts "You should enter an amount value" ; exit
+    puts "You should enter an amount value" ; exit 1
   } elseif { $investment <= 0 || $investment > 10000000 } {
-    puts "allowed range (1-1,00,00,000)"; exit
+    puts "allowed range (1-1,00,00,000)"; exit 1
   }
 
   puts -nonewline "Enter the date of investment - dd-mm-yyyy:"; flush stdout;
   gets stdin inv_date
   set res [ regexp {([[:digit:]]{2})-([[:digit:]]{2})-([[:digit:]]{4})} $inv_date discard inv_dd inv_mm inv_yyyy ]
   if { $res != 1 } {
-    puts "$inv_date is not in dd-mm-yyyy format" ; exit
+    puts "$inv_date is not in dd-mm-yyyy format" ; exit 1
   }
 
   puts -nonewline "Enter the amount you got as return:"; flush stdout;
   gets stdin returns
   if { [ string is space $returns ] == 1 } { 
-    puts "You must enter an amount" ; exit
+    puts "You must enter an amount" ; exit 1
   } elseif { [ string is double $returns ] == 0 } {
-    puts "You should enter an amount value" ; exit
+    puts "You should enter an amount value" ; exit 1
   } elseif { $returns <= 0 || $returns > 10000000 } {
-    puts "allowed range (1-1,00,00,000)"; exit
+    puts "allowed range (1-1,00,00,000)"; exit 1
   }
 
   puts -nonewline "Enter the date of encashment - dd-mm-yyyy:"; flush stdout;
   gets stdin ret_date
   set res [ regexp {([[:digit:]]{2})-([[:digit:]]{2})-([[:digit:]]{4})} $ret_date discard ret_dd ret_mm ret_yyyy ]
   if { $res != 1 } {
-    puts "$ret_date is not in dd-mm-yyyy format" ; exit
+    puts "$ret_date is not in dd-mm-yyyy format" ; exit 1
   }
 
   puts "Investment: $investment"
