@@ -2,6 +2,14 @@
 
 check_if_date_exists()
 {
+  if [ -z "$SCRATCH_DIR" ] ; then 
+    echo "$SCRATCH_DIR is not set."
+    return
+  fi
+  if [ -z "$REPO_DIR" ] ; then 
+    echo "$REPO_DIR is not set."
+    return
+  fi
   date_exists=0
   date=$1
   date_file=$date-nav
