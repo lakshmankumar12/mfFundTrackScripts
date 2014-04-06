@@ -42,3 +42,15 @@ get cagr between 2 dates for a fund
 ./compare_2_dates.sh <yyyy-mm-dd> <yyyy-mm-dd>
 
 
+What you should do when u have got a bunch of todays'
+------------------------------------------------------
+
+1. Get them into the downloads folder of the nav-repo
+2. Convert the todays to nav
+   for i in $(ls *today) ; do echo $i ; ../../scripts/convert_today_to_daily_format.sh $i  ; done
+3. Bundle the files
+   mv *nav ..
+   ../scripts/bundle_files.sh
+4. check status by finding missing files
+   ../scripts/list_missing_files.sh   | grep not | awk ' {print $1}' > missing_files
+

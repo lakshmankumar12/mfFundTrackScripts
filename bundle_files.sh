@@ -4,7 +4,7 @@ REPODIR=../nav-repo/
 
 cd $REPODIR
 
-for i in $(seq 2006 2013) ; do
+for i in $(seq 2006 2014) ; do
   for j in $(seq -w 01 12) ; do 
     month="$i-$j"
     list="$month*nav"

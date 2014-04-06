@@ -4,7 +4,7 @@ REPODIR=../nav-repo
 
 cd $REPODIR
 
-for yyyy in $(seq 2006 2012) ; do
+for yyyy in $(seq 2013 2014) ; do
   for mm in $(seq -w 01 12) ; do 
     month="$yyyy-$mm"
     days=$(cal $mm $yyyy | tail -n +3 | awk -v mm=$mm -v yyyy=$yyyy ' { 
