@@ -2,9 +2,9 @@
 
 import sys
 
-Message='''
+WelcomeMessage='''
 This program computes the corpus you should have at the beginning of every year as you live, so that you can happily say
-                              "I can stop working now for my sustenance.
+                              "I can stop working now for my sustenance."
 
 It needs your present age, age till you expect your corpus to serve you (till your/your dependants death,say),
 rate of return you get on ur savings, inflation rate and your current montly expenses
@@ -12,24 +12,6 @@ It simply presents the corpus required at each year such that it can both give y
 the required money left over which when re-invested sustains your inflation adjusted expenses till the required age.
 values in brackets are suggested examples. You can give your actual values. This program doesn't store your inputs. Your privacy is not compromised :)
 '''
-
-
-
-def getAsInt(s, exit_string):
-  try:
-    val = int(s)
-    return val
-  except ValueError:
-    print ("%s: Need integer. Got:%s"%(exit_string,s))
-    sys.exit(1)
-
-def getAsDouble(s, exit_string):
-  try:
-    val = float(s)
-    return val
-  except ValueError:
-    print ("%s: Need Numerical Values. Got:%s"%(exit_string,s))
-    sys.exit(1)
 
 age_input         =  ("Enter your present age",30,int,
                         "Need Integral Age value",18,121,"Sorry This program is only for atleast 18-aged mortals")
@@ -57,6 +39,7 @@ def general_input_getter(prompt,def_val,cast_fn,cast_string,lower_bound,upper_bo
      sys.exit(1)
   return val
 
+print WelcomeMessage
 age = general_input_getter(*age_input)
 sustain_age = general_input_getter(*sustain_age_input)
 returns = general_input_getter(*returns_input)
