@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import sys
+import locale
 
 WelcomeMessage='''
 This program computes the corpus you should have at the beginning of every year as you live, so that you can happily say
@@ -63,8 +64,13 @@ for i in range(sustain_age-2,age-1,-1):
   corpus_at_year[i] = expenses_per_year[i] + (prev_corpus/rr)
   prev_corpus = corpus_at_year[i]
 
+locale.setlocale(locale.LC_ALL,'en_US')
+def fmts(fmt,val):
+    return locale.format("%"+fmt,val,grouping=True).strip()
+
 for i in range(age,sustain_age):
-  print ("At year %2d, you start with corpus %11.2lf. You spend %11.2lf on monthly inflated expense of %11.2lf and left with corpus %11.2lf"%
-             (i,corpus_at_year[i],expenses_per_year[i],expenses_per_year[i]/12,corpus_at_year[i]-expenses_per_year[i]))
+  print ("At year %2d, you start with corpus %14s. You spend %12s on monthly inflated expense of %11s and left with corpus %14s"%
+             (i,fmts(".2lf",corpus_at_year[i]), fmts(".2lf",expenses_per_year[i]),
+                fmts(".2lf",expenses_per_year[i]/12), fmts(".2lf",corpus_at_year[i]-expenses_per_year[i])))
 
 print ("Happy wealth Building")
